@@ -6,7 +6,9 @@ void setup() {
 
   // The planet objects are initialized using the counter variable
   for (int i = 0; i < planets.length; i++ ) {
-    planets[i] = new Planet(60 + i*36, 24);
+    int moons = (i == 0) ? 2 : 1; // 1 planeta tem 2 luas, os outros 1 lua
+    color planetColor = color(random(255), random(255), random(255)); // cor aleatória para cada planeta
+    planets[i] = new Planet(60 + i*36, 24, moons, planetColor);
   }
 }
 
