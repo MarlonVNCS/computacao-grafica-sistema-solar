@@ -5,11 +5,11 @@ class Moon {
   float distance;   // Distance from sun
   float orbitspeed; // Orbit speed
   
-  Moon(float distance_, float diameter_) {
+  Moon(float distance_, float diameter_, float orbitspeed_) {
     distance = distance_;
     diameter = diameter_;
     theta = 0;
-    orbitspeed = random(-0.1,0.1);
+    orbitspeed = orbitspeed_;
   }
   
   void update() {

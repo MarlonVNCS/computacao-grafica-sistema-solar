@@ -6,24 +6,31 @@ class Planet {
   float orbitspeed; // Orbit speed
  
   // Each Planet now has a Moon!
-  Moon moon;
+  Moon[] moons;
  
   
-  Planet(float distance_, float diameter_) {
+  Planet(float distance_, float diameter_, int numMoons) {
     distance = distance_;
     diameter = diameter_;
     theta = 0;
     orbitspeed = random(0.01,0.03);
     
     // create the Moon 24 pixels from the planet with a diameter of 5
-    moon = new Moon(24,8);
+    moons = new Moon[numMoons];
+    for(int i = 0; i < numMoons; i++) {
+      float moonOrbitSpeed = random(-0.1,0.1); // cada lua tem uma orbitspeed diferente
+      float moonDistance = 24+i*8; // cada lua tem uma distância diferente do planeta
+      moons[i] = new Moon(moonDistance, 8, moonOrbitSpeed);
+    }
   }
   
   void update() {
     // Increment the angle to rotate
     theta += orbitspeed;
     // Update the moon
-    moon.update();
+    for(int i = 0; i < moons.length; i++) {
+      moons[i].update();
+    }
   }
   
   void display() {
@@ -37,7 +44,10 @@ class Planet {
     fill(175);
     ellipse(0,0,diameter,diameter);
     // The planet is drawn, now draw the moon
-    moon.display();
+
+    for(int i = 0; i < moons.length; i++) {
+      moons[i].display();
+    }
     
     // Once the planet is drawn, the matrix is restored with popMatrix() so that the next planet is not affected.
     popMatrix(); 
